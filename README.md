@@ -5,4 +5,4 @@ to extract addons you must have gmad in your PATH or set the GMAD_PATH environme
 
 # Building
 - Download the [Go tool](https://golang.org/dl/)
-- run `go build .` in the repository directory 
+- run `go build .` in the this directory 
