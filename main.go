@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/plally/steam_workshop_downloader/internal/steam"
+	"github.com/plally/workshopdl/internal/steam"
 	"github.com/ulikunitz/xz/lzma"
 	"io"
 	"log"
@@ -16,7 +16,7 @@ import (
 
 var (
 	workshopPattern = regexp.MustCompile(`https?://steamcommunity\.com/workshop/filedetails/\?id=([0-9]+)`)
-	idPattern = regexp.MustCompile("([0-9]+)")
+	idPattern       = regexp.MustCompile("([0-9]+)")
 )
 
 var (
@@ -68,7 +68,7 @@ func DownloadAddons(workshopId ...string) error {
 
 		downloadedFilename := strings.ReplaceAll(file.Filename, "/", "_")
 		err := downloadFile(file.FileURL, downloadedFilename)
-		if  err != nil {
+		if err != nil {
 			return err
 		}
 
@@ -87,13 +87,13 @@ func DownloadAddons(workshopId ...string) error {
 }
 
 func downloadFile(fileUrl, out string) error {
-	resp, err  := http.Get(fileUrl)
+	resp, err := http.Get(fileUrl)
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
 
-	decodedBody, err  := lzma.NewReader(resp.Body)
+	decodedBody, err := lzma.NewReader(resp.Body)
 	if err != nil {
 		return err
 	}
@@ -120,7 +120,7 @@ func gmadExtract(filename string) error {
 		fmt.Println("You should define the environment variable GMAD_PATH or add gmad to your PATH")
 		return fmt.Errorf("gmad executable not found: %w", err)
 	}
-	cmd := exec.Command(gmad, "extract", "-file",  filename)
+	cmd := exec.Command(gmad, "extract", "-file", filename)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd.Run()

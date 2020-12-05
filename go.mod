@@ -1,4 +1,4 @@
-module github.com/plally/steam_workshop_downloader
+module github.com/plally/workshopdl
 
 go 1.15
 
